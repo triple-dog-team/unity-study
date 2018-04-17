@@ -235,14 +235,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_Completed-Assets\Scripts\CompleteCameraController.cs" />
-    <Compile Include="Assets\_Completed-Assets\Scripts\CompletePlayerController.cs" />
-    <Compile Include="Assets\_Completed-Assets\Scripts\CompleteRotator.cs" />
-    <Compile Include="Assets\_Completed-Assets\TutorialInfo\Scripts\TutorialInfo.cs" />
+    <Compile Include="Assets\Scripts\CameraConttroller.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\_Completed-Assets\TutorialInfo\Fonts\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
