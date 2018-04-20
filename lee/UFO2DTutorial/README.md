@@ -42,4 +42,19 @@
 * joint  
 关节组件，连接两个刚体组件，适用于门、链子、钟摆一类的物体连接
 	- connect body 连接对象，不设置就与世界相连
-
+	- anchor 锚点坐标，围绕这个设置的点摇摆
+	- use spring 是否使用弹簧
+		- spring 弹簧力
+		- damper 阻尼
+		- target position 弹簧的目标角度，弹簧会拉向这个角度
+	- use motor 是否配置马达
+		- target velocity 对象逐步达到的速度
+		- force 用于达到速度的力
+		- free spin 如果是启动，马达不会破坏旋转只会加速
+	- use limits 启用的话绞链会被限制在两个角度之间 
+		- min
+		- max
+		- min bounce 最小弹跳，相当于到了最小限制时的碰撞弹力
+		- max bounce 最大弹跳
+	- break force 设置铰链破损的力，比如在门上设置一个力道，如果是个球撞上则开门，是一辆汽车撞上则是整个破坏掉，这就很coooooooooooooool
+	- break torque 设置铰链破损的扭矩，道理同上
