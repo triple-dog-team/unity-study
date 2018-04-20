@@ -37,3 +37,9 @@
    	- constraints 设置刚体只能沿某个轴进行旋转，可选xyz。
 * collistion  
 附加在GameObject上的碰撞器，按形状在菜单中列出
+	- is trigger
+		设置碰撞器或者是触发器，碰撞器for物理运动效果，触发器for事件，例如碰到后死亡、掉血等
+* joint  
+关节组件，连接两个刚体组件，适用于门、链子、钟摆一类的物体连接
+	- connect body 连接对象，不设置就与世界相连
+
