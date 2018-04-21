@@ -1,0 +1,4 @@
+sceneSetups:
+- path: F:/unity-study/lee/UFO2DTutorial/Assets/UFO2D.unity
+  isLoaded: 1
+  isActive: 1
