@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v: 5
+  bullet: {fileID: 1215114066730258, guid: bd932210df41a9c44baa1eae7986f962, type: 2}
 --- !u!50 &714552432
 Rigidbody2D:
   serializedVersion: 4

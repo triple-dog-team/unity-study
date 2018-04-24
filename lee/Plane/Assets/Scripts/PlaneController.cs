@@ -8,6 +8,7 @@ public class PlaneController : MonoBehaviour
     private const float l = 9.15f;
     Rigidbody2D rigidbody;
     public float v;
+    public GameObject bullet;
 
     // Use this for initialization
     void Start()
@@ -19,5 +20,10 @@ public class PlaneController : MonoBehaviour
     void Update()
     {
         rigidbody.AddForce(Utility.GetVector2() * v);
+
+        if (Input.GetButton("Fire1"))
+        {
+            Instantiate(bullet, new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
+        }
     }
 }

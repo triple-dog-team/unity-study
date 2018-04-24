@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Leeeeee/Desktop/fuck.exe
+F:/fuck.exe
 SceneListBegin?
 Assets/UFO2D.unity
 SceneListEnd?
