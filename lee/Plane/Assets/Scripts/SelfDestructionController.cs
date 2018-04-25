@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletDestroy : MonoBehaviour
+public class SelfDestructionController : MonoBehaviour
 {
 
     // Use this for initialization
@@ -14,10 +14,15 @@ public class BulletDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > Camera.current.transform.position.y+Camera.current.orthographicSize)
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
         {
+            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
-
     }
 }

@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 54394522}
   m_Layer: 0
   m_Name: BG
-  m_TagString: Untagged
+  m_TagString: BG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,9 +252,10 @@ GameObject:
   - component: {fileID: 419896554}
   - component: {fileID: 419896555}
   - component: {fileID: 419896556}
+  - component: {fileID: 419896557}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,6 +373,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311bfd4d3c1433d45acf5a19a223864d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &419896557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 419896551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf7eff29b58e80449622cf4a9296186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &714552428
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363927ac622092a4eb5bb1434bc1cebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  v: 5
+  v: 10
   bullet: {fileID: 1215114066730258, guid: bd932210df41a9c44baa1eae7986f962, type: 2}
   bulletInterval: 0.2
 --- !u!50 &714552432
