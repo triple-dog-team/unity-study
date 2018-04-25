@@ -9,6 +9,8 @@ public class PlaneController : MonoBehaviour
     Rigidbody2D rigidbody;
     public float v;
     public GameObject bullet;
+    public float bulletInterval;
+    private float currentInterval = 0;
 
     // Use this for initialization
     void Start()
@@ -19,11 +21,16 @@ public class PlaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentInterval += Time.deltaTime;
+
         rigidbody.AddForce(Utility.GetVector2() * v);
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && bulletInterval < currentInterval)
         {
             Instantiate(bullet, new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
+            currentInterval = 0;
         }
+
+
     }
 }
