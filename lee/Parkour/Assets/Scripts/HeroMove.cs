@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class HeroMove : MonoBehaviour
 {
+    public float MoveSpeed;
 
-    // Use this for initialization
-    void Start()
+    private void FixedUpdate()
     {
-
-    }
-
-    private void Update()
-    {
-        GameObject.Find("hero").transform.Translate(0.5f, 0, 0);
+        var rigidbody2DObj = GetComponent<Rigidbody2D>();
+        //x轴为移动速度，这里是移动啊
+        rigidbody2DObj.velocity = new Vector2(MoveSpeed, rigidbody2DObj.velocity.y);
     }
 }

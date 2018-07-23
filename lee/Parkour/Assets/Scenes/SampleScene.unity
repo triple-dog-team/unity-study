@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 1382503755}
   - component: {fileID: 1382503756}
   - component: {fileID: 1382503757}
+  - component: {fileID: 1382503758}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -427,7 +428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1382503751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.85, y: -2.96, z: 0}
+  m_LocalPosition: {x: -10.12, y: -6.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -490,6 +491,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca86229e37f1b6c49a01171682c29d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveSpeed: 10
+--- !u!114 &1382503758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1382503751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0793fa1d6b317be458a44681973ac7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpForce: 10
 --- !u!1 &1841457411
 GameObject:
   m_ObjectHideFlags: 0

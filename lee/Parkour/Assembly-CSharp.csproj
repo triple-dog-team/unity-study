@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\HeroDie.cs" />
+    <Compile Include="Assets\Scripts\HeroJump.cs" />
     <Compile Include="Assets\Scripts\HeroMove.cs" />
     <None Include="Assets\10thPlanet_GameReady\ReadMe_10thPlanet.txt" />
     <Reference Include="UnityEditor.StandardEvents">
