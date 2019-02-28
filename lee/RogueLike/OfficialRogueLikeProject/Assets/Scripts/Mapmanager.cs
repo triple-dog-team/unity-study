@@ -23,9 +23,12 @@ public class Mapmanager : MonoBehaviour
 
     }
 
+
     //地图初始化
     void InitMap()
     {
+        var walls = GameObject.Find("Walls");
+        var floors = GameObject.Find("Floors");
         //遍历行x列个所有的格子
         //围墙算法：如果0列或0行，则肯定是围墙（左边和下边），同时如果最大行或者最大列也是围墙（上边和右边）
         for (int x = 0; x < Rows; x++)
@@ -36,14 +39,15 @@ public class Mapmanager : MonoBehaviour
                 {
                     var r = Random.Range(0, outWall.Length);
                     //构造围墙
-                    GameObject.Instantiate(outWall[r], new Vector3(x, y, 0), Quaternion.identity);
+                    var g = GameObject.Instantiate(outWall[r], new Vector3(x, y, 0), Quaternion.identity);
+                    g.transform.SetParent(walls.transform);
                 }
                 else
                 {
                     var r = Random.Range(0, floor.Count);
                     //构造围墙
-                    GameObject.Instantiate(floor[r], new Vector3(x, y, 0), Quaternion.identity);
-
+                    var g = GameObject.Instantiate(floor[r], new Vector3(x, y, 0), Quaternion.identity);
+                    g.transform.SetParent(floors.transform);
                 }
             }
         }
