@@ -40,3 +40,4 @@
 10. 在使用GameObject.Instantiate静态函数创造游戏对象的时候，是创建在unity当前场景下的根目录，会导致运行后左侧动态产生的游戏对象大量的平铺，造成使用不便。可以把相应对象创建到单独的gameobject对象下面，效果相同，但利用gameobject进行了对象分组。
 11. Transform是在场景中所有对象的基础属性，它负责物体的变换（如移动，旋转，缩放等）
 12. 脚本设置父组件的方式是通过Gameobject的transform属性的setParent函数进行，这里需要关注的是setParent或者Parent属性并不在一般认为的object本身，而是放在了transform属性中。相似的setParent的参数也要求是要挂载父对象的transform属性。
+13. 创建地图时的循环很容易弄错，所以算法要搞清楚，另外图片如果是叠加放置，要记得先做好layer的排序，然后再给不同的prefab设置好所属layer，最后Random.Range记住是int的返回值。
