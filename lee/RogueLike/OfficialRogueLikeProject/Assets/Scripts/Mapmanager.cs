@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mapmanager : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
     //定义unity编辑器用属性集合，可以把prefab直接拖到里面作为随机池
     public GameObject[] outWall;
@@ -10,13 +10,21 @@ public class Mapmanager : MonoBehaviour
     public List<GameObject> kernelObjects;
     public GameObject player;
     public GameObject exit;
+    //在地图控制器中设置一个游戏管理器对象，把相应的管理交由它处理
+    public GameManager gm;
 
     public int Rows = 10;
     public int Columns = 10;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+
+    }
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        gm = GetComponent<GameManager>();
         InitMap();
     }
 
@@ -25,7 +33,6 @@ public class Mapmanager : MonoBehaviour
     {
 
     }
-
 
     //地图初始化
     void InitMap()
@@ -57,7 +64,6 @@ public class Mapmanager : MonoBehaviour
                     //一层墙，所以位置1，1为主角
                     if (x == 1 && y == 1)
                     {
-                        
                         GameObject.Instantiate(player, new Vector3(x, y, 0), Quaternion.identity);
                     }
 
@@ -67,10 +73,11 @@ public class Mapmanager : MonoBehaviour
                         GameObject.Instantiate(exit, new Vector3(x, y, 0), Quaternion.identity);
                     }
 
+
+                    //这里可以根据gm的属性来做处理，也可以直接把核心对象丢到gm里
                     //留路逻辑，列数-3或以上则为内圈的最后一列，所以是小于列-2
                     if (x > 1 && x < Columns - 2 && y > 1 && y < Rows - 2)
                     {
-                        Debug.Log($"{x},{y}");
                         //首先随机生成or不生成
                         var generateR = Random.Range(0, 2);
                         if (generateR > 0)
