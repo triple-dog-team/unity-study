@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MovingObject
 {
     // 主角坐标
     int x = 1;
@@ -11,31 +11,94 @@ public class Player : MonoBehaviour
 
     public float smooth = 1;
 
+    public int wallDamage = 1;
+    public int pointsPerFood = 10;
+    public int pointsPerSoda = 20;
+    public float restartLevelDelay = 1f;
+
+    Animator animator;
+    int food;
+
     Vector2 targetPos = new Vector2(1, 1);
-    Rigidbody2D rbd;
 
     private void Awake()
     { }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        rbd = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
+        //food = ??
+
+        base.Start();
+    }
+
+    void OnDisable()
+    {
+        //当主角被禁用时把food交给游戏管理器，没明白
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        var h = Input.GetAxisRaw("Horizontal");
-        var v = Input.GetAxisRaw("Vertical");
+        //如果不是玩家回合就不做事情
 
-        //控制一次只会像一个轴移动，z轴在2d项目中忽略
-        if (h > 0)
+        int h = 0;
+        int v = 0;
+
+        h = (int) Input.GetAxisRaw("Horizontal");
+        v = (int) Input.GetAxisRaw("Vertical");
+        if (h != 0)
         {
             v = 0;
         }
 
-        targetPos += new Vector2(h, v);
-        rbd.MovePosition(Vector2.Lerp(transform.position, targetPos, smooth * Time.deltaTime));
+        if (h != 0 || v != 0)
+        {
+            //没有定义墙类
+            AttemptMove<Component>(h, v);
+        }
+    }
+
+    void CheckIfGameOver()
+    {
+        if (food <= 0)
+        {
+            //调用管理器的游戏结束
+        }
+    }
+
+    protected override void AttemptMove<T>(int x, int y)
+    {
+        food--;
+        base.AttemptMove<T>(x, y);
+        RaycastHit2D hit;
+        CheckIfGameOver();
+        //移动后结束玩家回合
+    }
+
+    protected override void OnCantMove<T>(T component)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void Restart()
+    {
+        //场景加载，这个项目因为只有一个main场景所以利用它反复加载关卡，只需要变量++即可
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void LoseFood(int count)
+    {
+        animator.SetTrigger("受伤触发器");
+        food -= count;
+        CheckIfGameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //处理exit、food、soda
     }
 }

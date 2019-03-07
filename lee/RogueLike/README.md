@@ -53,3 +53,30 @@ parameters页增加trigger，之后在transaction的condition里添加触发器�
 22. Vector2.Lerp()线性的把位置1移动到位置2，参数3为移动耗时，同时使用Timer.deltatime做帧转换。
 23. Update中移动会造成角色的抖动，使用fixedupdate基本解决掉了。
 24. 移动存在问题，使用MovePosition移动不是每秒固定移动一次，导致移动很奇怪。
+25. 用官方方案代替视频教程学到，计算移动距离时使用(v3-v3).***sqrMagnitude*** 使用sqrMagnitude距离的平方根是因为它的计算速度会快但牺牲精度，游戏中一般涉及到帧移动都不需要太精确，每秒会有很多帧处理，所以性能更加重要一些。magnitude是精确距离，sqrMagnitude是平方根距离。
+26. Vector3.MoveTowards方法让物体从当前位置移动到目标位置，第三个参数为**每次移动的最大距离**。那么当物体从a移动到b，假设a-b为4的话，设置1 * Time.deltaTime作为第三个参数，意味着每次移动一个单位的最大距离，也就是需要4秒移动完毕，同理设置0.5 * deltaTime则移动距离减半所需移动时间翻倍为8秒。学习这里遇到了一些理解上的障碍，问题主要出在没有把unity的整个坐标系中的x，y，z的单位带入到distance的概念中。
+27. 小技巧，当需要做移动的时间设定的时候定义一个public类型的float变量可以控制移动的每一此的移动时间？。然后用1/变量得到倒数用于后续与Time.deltaTime相乘。之前有学习到deltaTime是每一帧动画的时间，用它乘以每一秒设置的移动距离就等于每一帧移动的距离了。
+28. 使用Physics2D.Linecast来发射一个专门用于碰撞检测的射线来测试两点间碰到的物体并返回。参数layer可以设置希望做碰撞检测的物体层。
+29. Startcoroutine和yield return是结合来使用的，需要进一步深入学习。Startcoroutine的官方解释为：它可以任意时候使用yield暂停，yield return的值决定了什么时候恢复执行。协程在协调几帧中执行的操作有极大的用处，几乎没有性能开销。它一般都会立即返回，然而你也可以获取到返回值，但是这一步会在协程结束时生效。
+30. 协程的例子如下
+```
+void Start()
+{
+    Debug.log("start1);
+    StartCoroutine(Test());
+    Debug.log("start2);
+}
+
+IEnumerator Test()
+{
+    Debug.log("test1");
+    yield return null;  暂停协程（如果当前函数是协程调用的话）这里可以返回new WaitForSeconds(3)来告知调用方先执行start2然后等待3秒后恢复当前协程的执行，打印test2
+    Debug.log("test2");
+}
+
+运行结果为:
+start1
+test1
+start2
+test2
+```
