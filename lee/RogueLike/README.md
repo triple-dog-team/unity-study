@@ -52,3 +52,4 @@ parameters页增加trigger，之后在transaction的condition里添加触发器�
 21. 在脚本中使用GetComponent家族的各种获取组件方法可以从当前游戏对象或者其对象中获取到相应的内容，用泛型还可以根据类别来特定获取。
 22. Vector2.Lerp()线性的把位置1移动到位置2，参数3为移动耗时，同时使用Timer.deltatime做帧转换。
 23. Update中移动会造成角色的抖动，使用fixedupdate基本解决掉了。
+24. 移动存在问题，使用MovePosition移动不是每秒固定移动一次，导致移动很奇怪。

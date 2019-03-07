@@ -15,18 +15,16 @@ public class Player : MonoBehaviour
     Rigidbody2D rbd;
 
     private void Awake()
-    {
-        rbd = GetComponent<Rigidbody2D>();
-    }
+    { }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rbd = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
