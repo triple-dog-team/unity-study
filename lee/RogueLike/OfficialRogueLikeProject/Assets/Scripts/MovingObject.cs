@@ -5,30 +5,32 @@ using UnityEngine;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveSpeed = 10f;
+    public float moveSpeed = 0.1f;
     public LayerMask blockingLayer;
 
     BoxCollider2D boxCollider;
     Rigidbody2D rbd;
+    float inverseTime;
 
     protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         rbd = GetComponent<Rigidbody2D>();
+        inverseTime = 1f / moveSpeed;
     }
 
     protected IEnumerator SmoothMovement(Vector3 end)
     {
         float sqrDistance = (transform.position - end).sqrMagnitude;
-
+        //Debug.Log($"sqrDistance:{sqrDistance}");
         //Epsilon是接近0的无限小值，也就意味着当距离为0时才停止移动
         //这里的逻辑就是通过调用平滑移动的函数，来把当前对象移动到end位置，并且使用moveSpeed的速度平滑移动过去。
         while (sqrDistance > float.Epsilon)
         {
-            rbd.transform.localPosition = Vector3.MoveTowards(rbd.position, end, moveSpeed * Time.deltaTime);
+            var position = Vector3.MoveTowards(rbd.position, end, inverseTime * Time.deltaTime);
+            Debug.Log($"transform.position:{transform.position}    position:{position}");
+            rbd.MovePosition(position);
             sqrDistance = (transform.position - end).sqrMagnitude;
-            //TODO
-            //在最后一帧重新判断循环条件，这里没看懂
             yield return null;
         }
     }
@@ -46,7 +48,7 @@ public abstract class MovingObject : MonoBehaviour
         var end = start + new Vector2(x, y);
         //禁用碰撞器，防止射线碰撞自己，射线可能是由自身中心射出的，所以会让外围的碰撞器触发
         boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start, end, blockingLayer);
+        hit = Physics2D.Linecast(start, end, blockingLayer.value);
         boxCollider.enabled = true;
 
         //检测如果hit命中的话，则认为目的地可以移动，否则不行

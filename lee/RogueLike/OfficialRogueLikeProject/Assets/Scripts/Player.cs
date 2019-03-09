@@ -28,9 +28,6 @@ public class Player : MovingObject
     protected override void Start()
     {
         animator = GetComponent<Animator>();
-
-        //food = ??
-
         base.Start();
     }
 
@@ -58,7 +55,7 @@ public class Player : MovingObject
         if (h != 0 || v != 0)
         {
             //没有定义墙类
-            AttemptMove<Component>(h, v);
+            AttemptMove<Wall>(h, v);
         }
     }
 
@@ -81,7 +78,10 @@ public class Player : MovingObject
 
     protected override void OnCantMove<T>(T component)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("撞墙");
+        Wall hitWall = component as Wall;
+        hitWall.DamangeWall(wallDamage);
+        animator.SetTrigger("Attack");
     }
 
     void Restart()

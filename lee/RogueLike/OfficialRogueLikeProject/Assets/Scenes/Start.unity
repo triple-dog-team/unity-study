@@ -293,6 +293,7 @@ MonoBehaviour:
   - {fileID: 7820485695677590160, guid: a29dd1ef4f233d54294b4a6baee3b1f2, type: 3}
   player: {fileID: 5228260097773323381, guid: b9f2944824c1470478dba581c8b154cc, type: 3}
   exit: {fileID: 758194636024152814, guid: 5137ae61815e0094aa8a5c6234d686ad, type: 3}
+  gm: {fileID: 0}
   Rows: 10
   Columns: 10
 --- !u!1 &1972447799
