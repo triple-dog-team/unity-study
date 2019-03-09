@@ -25,8 +25,7 @@ public abstract class MovingObject : MonoBehaviour
         //这里的逻辑就是通过调用平滑移动的函数，来把当前对象移动到end位置，并且使用moveSpeed的速度平滑移动过去。
         while (sqrDistance > float.Epsilon)
         {
-            var newPosition = Vector3.MoveTowards(rbd.position, end, moveSpeed * Time.deltaTime);
-            rbd.MovePosition(newPosition);
+            rbd.transform.localPosition = Vector3.MoveTowards(rbd.position, end, moveSpeed * Time.deltaTime);
             sqrDistance = (transform.position - end).sqrMagnitude;
             //TODO
             //在最后一帧重新判断循环条件，这里没看懂
