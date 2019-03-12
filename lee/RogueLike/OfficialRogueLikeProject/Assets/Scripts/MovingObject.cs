@@ -48,7 +48,7 @@ public abstract class MovingObject : MonoBehaviour
         var end = start + new Vector2(x, y);
         //禁用碰撞器，防止射线碰撞自己，射线可能是由自身中心射出的，所以会让外围的碰撞器触发
         boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start, end, blockingLayer.value);
+        hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
 
         //检测如果hit命中的话，则认为目的地可以移动，否则不行

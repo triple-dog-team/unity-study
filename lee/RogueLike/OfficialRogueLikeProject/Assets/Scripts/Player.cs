@@ -38,7 +38,7 @@ public class Player : MovingObject
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //如果不是玩家回合就不做事情
 
