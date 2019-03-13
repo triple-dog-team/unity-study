@@ -1,4 +1,4 @@
-# Unity官网的拾荒者样例项目，用于熟悉Unity的开发
+# Unity官网的拾荒者样例项目
 
 [拾荒者](https://unity3d.com/learn/tutorials/s/2d-roguelike-tutorial)
 
