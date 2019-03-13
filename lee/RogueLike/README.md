@@ -86,3 +86,26 @@ test2
 32. 销毁物体：gameObject.SetActive(false);
 33. 给prefab设置脚本可以多选后利用上方菜单栏
 34. 问题：出现异常现象，写好移动脚本之后会出现无限尝试移动而又无法移动的问题，检查官网的代码后发现官方实现并没有碰撞导致无法移动，而是使用的碰撞检测阻止移动来实现。经过一番艰苦检查，发现rigidbody2d的body type会造成碰撞的问题。
+35. 脚本的相互嵌入，不可以直接定义public并拖拽，可以使用GetComponent<XXXClass>()
+36. 对于GameManager的单例设置，为了确保游戏管理器一类的全局唯一性组件只会存在一个，使用单例模式进行脚本编写。
+```
+//unity的脚本单例比较特殊
+void Awake()
+{
+    if(instance == null)
+    {
+        //正常来说都是走这条路径
+        instance = this;
+    }
+    else
+    {
+        //如果当脚本被唤醒时发现instance不是初始化状态则销毁掉
+        Destroy(gameObject);
+    }
+    DontDestroyOnLoad(gameObject);
+}
+```
+37. 对上面代码的部分扩展解释，由于unity的场景加载的时候会导致所有的gameObject的销毁，这样我们无法用GameManager来保存分数了，所以在初始化时增加了一个在加载时不销毁的设置DontDestroyOnLoad(gameObject);使切换场景时单例依旧保留，那么分数等跨场景信息就可以保存在里面了。
+38. 继续扩展，GameManager被做成了prefab，虽然它不是被复用的一个东西。此外GameManager被做成prefab好处还有它可以挂载两个脚本，游戏管理和棋盘管理，并且可以拖拽相应的属性到上面。由于脚本本身就必须挂在游戏对象上才能生效，那么游戏管理器完全也可以挂两个脚本并且脚本从自身来找其他脚本（贼好用）。
+39. unity在实例化脚本类的时候使用的Instantiate方法。在unity里，不要使用c#类的构造函数来做事，c#的类的实例化和unity的游戏主线程不是一个线程，所以无法访问unity的api。实例化常常和prefab配合使用，实例化多个prefab。
+40. 脚本Instantiate(gameObject)，无限的在实例化自己，导致unity崩溃了- -o

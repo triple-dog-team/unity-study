@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -10,8 +11,6 @@ public class MapManager : MonoBehaviour
     public List<GameObject> kernelObjects;
     public GameObject player;
     public GameObject exit;
-    //在地图控制器中设置一个游戏管理器对象，把相应的管理交由它处理
-    public GameManager gm;
 
     public int Rows = 10;
     public int Columns = 10;
@@ -24,18 +23,10 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        gm = GetComponent<GameManager>();
-        InitMap();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     //地图初始化
-    void InitMap()
+    public void InitMap(int level)
     {
         var walls = GameObject.Find("Walls");
         var floors = GameObject.Find("Floors");
@@ -73,8 +64,6 @@ public class MapManager : MonoBehaviour
                         GameObject.Instantiate(exit, new Vector3(x, y, 0), Quaternion.identity);
                     }
 
-
-                    //这里可以根据gm的属性来做处理，也可以直接把核心对象丢到gm里
                     //留路逻辑，列数-3或以上则为内圈的最后一列，所以是小于列-2
                     if (x > 1 && x < Columns - 2 && y > 1 && y < Rows - 2)
                     {

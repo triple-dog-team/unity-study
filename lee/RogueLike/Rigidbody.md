@@ -8,3 +8,4 @@ Dynamic被设计用在模拟场景下，例如质量、阻力同时重力和力�
 2. Kinematic
 同样被用在模拟场景，但它不受重力和力学影响。所以它比Dynamic性能能好一些，它被设计通过Rigidbody2D.MovePosition以及MoveRotation函数来控制移动，容易猜测到Dynamic更倾向于使用外力来推动它进行运动模拟。
 3. Static
+Static类型完全不在模拟状态下运行，被碰撞中之后完全不会移动（摩擦力无穷大),所以类型命名为Static
