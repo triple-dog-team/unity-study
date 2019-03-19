@@ -14,7 +14,6 @@ public class MapManager : MonoBehaviour
 
     public int Rows = 10;
     public int Columns = 10;
-
     private void Start()
     {
 

@@ -109,3 +109,25 @@ void Awake()
 38. 继续扩展，GameManager被做成了prefab，虽然它不是被复用的一个东西。此外GameManager被做成prefab好处还有它可以挂载两个脚本，游戏管理和棋盘管理，并且可以拖拽相应的属性到上面。由于脚本本身就必须挂在游戏对象上才能生效，那么游戏管理器完全也可以挂两个脚本并且脚本从自身来找其他脚本（贼好用）。
 39. unity在实例化脚本类的时候使用的Instantiate方法。在unity里，不要使用c#类的构造函数来做事，c#的类的实例化和unity的游戏主线程不是一个线程，所以无法访问unity的api。实例化常常和prefab配合使用，实例化多个prefab。
 40. 脚本Instantiate(gameObject)，无限的在实例化自己，导致unity崩溃了- -o
+41. 游戏管理器中增加变量保存玩家的食物数，这里没弄清楚为什么不是主角自己保存。视频后面同样在player类中也定义了一份food属性，并且在player类的start函数里把游戏控制器中的数据获取回来。推测应该是由于场景的重置会导致player也重置，所以需要有一个全局的位置存放food这种全局属性。
+42. 游戏管理器中保存回合控制，游戏运行逻辑中主角要先动，所以虽然不是完全的回合制游戏但是还是有顺序问题存在，主角先，敌人后。
+43. HideInInspector特性表示在unity的视窗中隐藏不现实，但可以被其他类调用。
+44. 把吃苏打水和苹果的增加量定义在玩家类中是个不错的思路，例如当要设计增长回复量时就可以操作这些变量。
+45. ondisable函数为unity内置函数，当当前物体被禁用时触发。（如enabled属性被设置为false)
+46. 在游戏进行过程中，由玩家脚本判断游戏是否结束，结束时调用游戏控制器的游戏结束函数。这应该是比较典型的游戏管理器和玩家之间的交互了。
+47. 使用Application.LoadLevel(Application.loadedLevel);来加载已经加载的场景，由于该游戏只有一个场景，所以逻辑是反复加载这一个场景来达到关卡变化的效果。但是代码写完后并没有重新生成地图。经过对比官网代码，gamemanager类缺少一断初始化的代码，使用SceneManager.sceneloaded绑定场景加载逻辑，同时使用[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]修饰初始化仅在场景加载后绑定
+```
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static public void CallBackInitialization()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    static void OnSceneLoaded(Scene s, LoadSceneMode mode)
+    {
+        //这才是正确的初始化逻辑，当场景加载后（利用RuntimeInitializeLoadType.AfterSceneLoad指定了场景加载后才赋值场景的再次加载逻辑）
+        //被使用Application.LoadLevel(Application.loadedLevel);多次触发
+        instance.Level++;
+        instance.InitGame();
+    }
+```
