@@ -131,3 +131,4 @@ void Awake()
         instance.InitGame();
     }
 ```
+48. 在敌人类初始化时中存储player对象，用于指定目标
